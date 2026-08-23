@@ -19,8 +19,12 @@ real receipt scanning.
 - **Brand fonts** — Barlow and Barlow Condensed (OFL-licensed, from Google
   Fonts) are embedded and used throughout, replacing the earlier
   system-font stand-in.
-- **App icon** — a simple generated shield + clock mark on the brand's
-  steel-blue gradient.
+- **App icon** — the shield + U-turn arrow mark (navy on lime), from the
+  icon set in `design/app-icon/` (source SVG, iOS/Android exports, and
+  color variants). The 1024×1024 used in `Assets.xcassets` is a flattened,
+  full-bleed version (no alpha, no pre-rounded corners) — iOS applies its
+  own corner mask, and an alpha channel would be rejected on App Store
+  submission.
 - **Settings** — Notifications toggle persists (not yet wired to actually
   schedule reminders), "Export my data" shares a JSON file of your
   purchases, "Delete all data" clears the SwiftData store after
