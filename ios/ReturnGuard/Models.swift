@@ -1,15 +1,28 @@
 import Foundation
+import SwiftData
 
-struct Purchase: Identifiable, Hashable {
-    let id = UUID()
+@Model
+final class Purchase {
     var product: String
     var store: String
     var price: Double
     var purchaseDate: Date
     var returnWindowDays: Int
     var warrantyYears: Int
-    var returned: Bool = false
-    var recentlyAdded: Bool = false
+    var returned: Bool
+    var recentlyAdded: Bool
+
+    init(product: String, store: String, price: Double, purchaseDate: Date,
+         returnWindowDays: Int, warrantyYears: Int, returned: Bool = false, recentlyAdded: Bool = false) {
+        self.product = product
+        self.store = store
+        self.price = price
+        self.purchaseDate = purchaseDate
+        self.returnWindowDays = returnWindowDays
+        self.warrantyYears = warrantyYears
+        self.returned = returned
+        self.recentlyAdded = recentlyAdded
+    }
 
     enum Urgency { case safe, approaching, urgent }
 
@@ -38,24 +51,26 @@ struct Purchase: Identifiable, Hashable {
         Calendar.current.date(byAdding: .day, value: -n, to: Date()) ?? Date()
     }
 
-    static let samples: [Purchase] = [
-        Purchase(product: "Sony WH-1000XM6", store: "Amazon", price: 399.00,
-                 purchaseDate: daysAgo(25), returnWindowDays: 30, warrantyYears: 2),
-        Purchase(product: "Zalando wool jacket", store: "Zalando", price: 89.00,
-                 purchaseDate: daysAgo(19), returnWindowDays: 30, warrantyYears: 1),
-        Purchase(product: "IKEA Malm desk", store: "IKEA", price: 149.00,
-                 purchaseDate: daysAgo(6), returnWindowDays: 30, warrantyYears: 2),
-        Purchase(product: "Uniqlo linen shirt", store: "Uniqlo", price: 39.90,
-                 purchaseDate: daysAgo(2), returnWindowDays: 30, warrantyYears: 1),
-        Purchase(product: "Philips Hue starter set", store: "MediaMarkt", price: 119.00,
-                 purchaseDate: daysAgo(0), returnWindowDays: 30, warrantyYears: 2, recentlyAdded: true),
-        Purchase(product: "Nike Pegasus 42", store: "Nike", price: 129.99,
-                 purchaseDate: daysAgo(40), returnWindowDays: 30, warrantyYears: 1, returned: true),
-        Purchase(product: "Anker power bank", store: "Amazon", price: 45.99,
-                 purchaseDate: daysAgo(50), returnWindowDays: 30, warrantyYears: 1),
-        Purchase(product: "Dyson V15 Detect", store: "MediaMarkt", price: 649.00,
-                 purchaseDate: daysAgo(290), returnWindowDays: 30, warrantyYears: 2),
-        Purchase(product: "Samsung 65\" TV", store: "Coolblue", price: 1199.00,
-                 purchaseDate: daysAgo(766), returnWindowDays: 30, warrantyYears: 3),
-    ]
+    static var samples: [Purchase] {
+        [
+            Purchase(product: "Sony WH-1000XM6", store: "Amazon", price: 399.00,
+                     purchaseDate: daysAgo(25), returnWindowDays: 30, warrantyYears: 2),
+            Purchase(product: "Zalando wool jacket", store: "Zalando", price: 89.00,
+                     purchaseDate: daysAgo(19), returnWindowDays: 30, warrantyYears: 1),
+            Purchase(product: "IKEA Malm desk", store: "IKEA", price: 149.00,
+                     purchaseDate: daysAgo(6), returnWindowDays: 30, warrantyYears: 2),
+            Purchase(product: "Uniqlo linen shirt", store: "Uniqlo", price: 39.90,
+                     purchaseDate: daysAgo(2), returnWindowDays: 30, warrantyYears: 1),
+            Purchase(product: "Philips Hue starter set", store: "MediaMarkt", price: 119.00,
+                     purchaseDate: daysAgo(0), returnWindowDays: 30, warrantyYears: 2, recentlyAdded: true),
+            Purchase(product: "Nike Pegasus 42", store: "Nike", price: 129.99,
+                     purchaseDate: daysAgo(40), returnWindowDays: 30, warrantyYears: 1, returned: true),
+            Purchase(product: "Anker power bank", store: "Amazon", price: 45.99,
+                     purchaseDate: daysAgo(50), returnWindowDays: 30, warrantyYears: 1),
+            Purchase(product: "Dyson V15 Detect", store: "MediaMarkt", price: 649.00,
+                     purchaseDate: daysAgo(290), returnWindowDays: 30, warrantyYears: 2),
+            Purchase(product: "Samsung 65\" TV", store: "Coolblue", price: 1199.00,
+                     purchaseDate: daysAgo(766), returnWindowDays: 30, warrantyYears: 3),
+        ]
+    }
 }

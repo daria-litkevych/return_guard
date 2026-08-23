@@ -79,7 +79,7 @@ struct PurchaseDetailView: View {
                 VStack(alignment: .leading, spacing: 5) {
                     Text("Return window").font(.rgBody(14, weight: .semibold)).foregroundStyle(chipColor)
                     Text(purchase.daysLeft >= 0 ? "\(purchase.daysLeft) days left" : "Window closed")
-                        .font(.system(size: 38, weight: .bold, design: .rounded))
+                        .font(.rgHeading(38, weight: .bold))
                         .foregroundStyle(chipColor)
                     Text("Return by \(purchase.returnDeadline.formatted(date: .long, time: .omitted))")
                         .font(.rgBody(14)).foregroundStyle(RG.textSecondary)

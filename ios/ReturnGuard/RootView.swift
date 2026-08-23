@@ -1,7 +1,10 @@
 import SwiftUI
+import SwiftData
 
 struct RootView: View {
     @StateObject private var model = AppModel()
+    @Environment(\.modelContext) private var modelContext
+    @Query(sort: \Purchase.purchaseDate, order: .reverse) private var purchases: [Purchase]
 
     var body: some View {
         ZStack {
@@ -26,13 +29,13 @@ struct RootView: View {
                     .zIndex(2)
             }
 
-            if model.scanPhase == .camera {
-                ScanReceiptView()
+            if model.scanPhase == .processing {
+                ScanProcessingView()
                     .transition(.opacity)
                     .zIndex(3)
             }
-            if model.scanPhase == .confirm {
-                ConfirmReceiptView()
+            if model.scanPhase == .review {
+                ReceiptFormView()
                     .transition(.move(edge: .bottom).combined(with: .opacity))
                     .zIndex(3)
             }
@@ -42,12 +45,30 @@ struct RootView: View {
         .animation(.easeOut(duration: 0.25), value: model.scanPhase)
         .sheet(isPresented: $model.showAddSheet) {
             AddPurchaseSheet()
-                .presentationDetents([.height(340)])
+                .presentationDetents([.height(360)])
                 .presentationDragIndicator(.hidden)
                 .presentationCornerRadius(28)
                 .environmentObject(model)
         }
+        .fullScreenCover(isPresented: Binding(
+            get: { model.scanPhase == .scanning },
+            set: { isPresented in if !isPresented { model.cancelScan() } }
+        )) {
+            DocumentScannerView(
+                onScanned: { image in model.handleScannedImage(image) },
+                onCancel: { model.cancelScan() }
+            )
+            .ignoresSafeArea()
+        }
         .environmentObject(model)
+        .onAppear {
+            model.modelContext = modelContext
+            model.sync(purchases)
+            model.seedIfNeeded()
+        }
+        .onChange(of: purchases) { _, newValue in
+            model.sync(newValue)
+        }
     }
 }
 

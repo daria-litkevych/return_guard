@@ -1,4 +1,5 @@
 import SwiftUI
+import SwiftData
 
 @main
 struct ReturnGuardApp: App {
@@ -7,5 +8,6 @@ struct ReturnGuardApp: App {
             RootView()
                 .preferredColorScheme(.light)
         }
+        .modelContainer(for: Purchase.self)
     }
 }

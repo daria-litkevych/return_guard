@@ -33,13 +33,27 @@ enum RG {
 }
 
 extension Font {
-    /// Stands in for the brand's Barlow Condensed until real font files are added to the project.
+    /// The brand's Barlow Condensed (embedded, see Fonts/ + Info.plist's UIAppFonts).
     static func rgHeading(_ size: CGFloat, weight: Font.Weight = .semibold) -> Font {
-        .system(size: size, weight: weight, design: .rounded)
+        switch weight {
+        case .bold, .heavy, .black:
+            return .custom("BarlowCondensed-Bold", size: size)
+        case .semibold:
+            return .custom("BarlowCondensed-SemiBold", size: size)
+        default:
+            return .custom("BarlowCondensed-Medium", size: size)
+        }
     }
-    /// Stands in for the brand's Barlow.
+    /// The brand's Barlow (embedded, see Fonts/ + Info.plist's UIAppFonts).
     static func rgBody(_ size: CGFloat, weight: Font.Weight = .regular) -> Font {
-        .system(size: size, weight: weight, design: .default)
+        switch weight {
+        case .semibold, .bold, .heavy, .black:
+            return .custom("Barlow-SemiBold", size: size)
+        case .medium:
+            return .custom("Barlow-Medium", size: size)
+        default:
+            return .custom("Barlow-Regular", size: size)
+        }
     }
 }
 

@@ -1,7 +1,9 @@
 import SwiftUI
 
 struct SettingsView: View {
-    @State private var notificationsOn = true
+    @EnvironmentObject var model: AppModel
+    @AppStorage("notificationsEnabled") private var notificationsOn = true
+    @State private var showDeleteConfirm = false
 
     var body: some View {
         ScrollView {
@@ -57,13 +59,33 @@ struct SettingsView: View {
                     RowDivider().padding(.horizontal, 12)
                     settingsRow("Restore purchases")
                     RowDivider().padding(.horizontal, 12)
-                    settingsRow("Export my data")
+
+                    ShareLink(item: model.exportURL()) {
+                        HStack {
+                            Text("Export my data").font(.rgBody(15)).foregroundStyle(RG.ink)
+                            Spacer()
+                            Image(systemName: "square.and.arrow.up").foregroundStyle(RG.textTertiary)
+                        }
+                        .padding(12)
+                        .contentShape(Rectangle())
+                    }
+
                     RowDivider().padding(.horizontal, 12)
                     settingsRow("Help")
                     RowDivider().padding(.horizontal, 12)
                     settingsRow("About")
                     RowDivider().padding(.horizontal, 12)
-                    settingsRow("Delete all data", color: RG.urgent)
+
+                    Button {
+                        showDeleteConfirm = true
+                    } label: {
+                        HStack {
+                            Text("Delete all data").font(.rgBody(15)).foregroundStyle(RG.urgent)
+                            Spacer()
+                        }
+                        .padding(12)
+                        .contentShape(Rectangle())
+                    }
                 }
                 .padding(4)
                 .rgCard(padding: 0)
@@ -71,6 +93,12 @@ struct SettingsView: View {
             .padding(.horizontal, 20)
             .padding(.top, 16)
             .padding(.bottom, 26)
+        }
+        .confirmationDialog("Delete everything?", isPresented: $showDeleteConfirm, titleVisibility: .visible) {
+            Button("Delete all data", role: .destructive) { model.deleteAllData() }
+            Button("Cancel", role: .cancel) {}
+        } message: {
+            Text("This removes every tracked purchase and warranty. This can't be undone.")
         }
     }
 

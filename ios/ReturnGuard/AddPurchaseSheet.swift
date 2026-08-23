@@ -12,10 +12,19 @@ struct AddPurchaseSheet: View {
                 optionRow(icon: "camera.viewfinder", title: "Scan receipt", subtitle: "Photograph it, we read the details") {
                     model.startScan()
                 }
-                optionRow(icon: "square.and.arrow.up", title: "Upload", subtitle: "Screenshot, PDF or photo") {}
-                optionRow(icon: "square.and.pencil", title: "Enter manually", subtitle: "Four fields, that's it") {}
+                optionRow(icon: "square.and.arrow.up", title: "Upload", subtitle: "Coming soon", enabled: false) {}
+                optionRow(icon: "square.and.pencil", title: "Enter manually", subtitle: "Four fields, that's it") {
+                    model.startManualEntry()
+                }
             }
             .padding(.top, 16)
+
+            if let error = model.scanErrorMessage {
+                Text(error)
+                    .font(.rgBody(13))
+                    .foregroundStyle(RG.urgent)
+                    .padding(.top, 12)
+            }
 
             Spacer()
         }
@@ -24,7 +33,8 @@ struct AddPurchaseSheet: View {
         .background(RG.background.ignoresSafeArea())
     }
 
-    private func optionRow(icon: String, title: String, subtitle: String, action: @escaping () -> Void) -> some View {
+    private func optionRow(icon: String, title: String, subtitle: String, enabled: Bool = true,
+                            action: @escaping () -> Void) -> some View {
         Button(action: action) {
             HStack(spacing: 14) {
                 ZStack {
@@ -43,7 +53,9 @@ struct AddPurchaseSheet: View {
             .background(RG.surface)
             .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
             .shadow(color: .black.opacity(0.05), radius: 4, x: 0, y: 1)
+            .opacity(enabled ? 1 : 0.5)
         }
         .buttonStyle(.plain)
+        .disabled(!enabled)
     }
 }

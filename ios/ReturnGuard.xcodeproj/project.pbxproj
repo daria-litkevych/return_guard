@@ -7,44 +7,63 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		AA0000000000000000000013 /* ReturnGuardApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000012 /* ReturnGuardApp.swift */; };
-		AA0000000000000000000015 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000014 /* Theme.swift */; };
-		AA0000000000000000000017 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000016 /* Models.swift */; };
-		AA0000000000000000000019 /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000018 /* AppModel.swift */; };
-		AA000000000000000000001B /* Components.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000001A /* Components.swift */; };
-		AA000000000000000000001D /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000001C /* RootView.swift */; };
-		AA000000000000000000001F /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000001E /* HomeView.swift */; };
-		AA0000000000000000000021 /* PurchasesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000020 /* PurchasesView.swift */; };
-		AA0000000000000000000023 /* WarrantiesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000022 /* WarrantiesView.swift */; };
-		AA0000000000000000000025 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000024 /* SettingsView.swift */; };
-		AA0000000000000000000027 /* PurchaseDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000026 /* PurchaseDetailView.swift */; };
-		AA0000000000000000000029 /* AddPurchaseSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000028 /* AddPurchaseSheet.swift */; };
-		AA000000000000000000002B /* ScanReceiptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000002A /* ScanReceiptView.swift */; };
-		AA000000000000000000002D /* ConfirmReceiptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000002C /* ConfirmReceiptView.swift */; };
-		AA000000000000000000000B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000000A /* Assets.xcassets */; };
+		AA0000000000000000000015 /* ReturnGuardApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000014 /* ReturnGuardApp.swift */; };
+		AA0000000000000000000017 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000016 /* Theme.swift */; };
+		AA0000000000000000000019 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000018 /* Models.swift */; };
+		AA000000000000000000001B /* Receipt.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000001A /* Receipt.swift */; };
+		AA000000000000000000001D /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000001C /* AppModel.swift */; };
+		AA000000000000000000001F /* Components.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000001E /* Components.swift */; };
+		AA0000000000000000000021 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000020 /* RootView.swift */; };
+		AA0000000000000000000023 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000022 /* HomeView.swift */; };
+		AA0000000000000000000025 /* PurchasesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000024 /* PurchasesView.swift */; };
+		AA0000000000000000000027 /* WarrantiesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000026 /* WarrantiesView.swift */; };
+		AA0000000000000000000029 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000028 /* SettingsView.swift */; };
+		AA000000000000000000002B /* PurchaseDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000002A /* PurchaseDetailView.swift */; };
+		AA000000000000000000002D /* AddPurchaseSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000002C /* AddPurchaseSheet.swift */; };
+		AA000000000000000000002F /* DocumentScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000002E /* DocumentScannerView.swift */; };
+		AA0000000000000000000031 /* ReceiptOCR.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000030 /* ReceiptOCR.swift */; };
+		AA0000000000000000000033 /* ReceiptFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000032 /* ReceiptFormView.swift */; };
+		AA0000000000000000000035 /* ScanProcessingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000034 /* ScanProcessingView.swift */; };
+		AA0000000000000000000037 /* Barlow-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000036 /* Barlow-Regular.ttf */; };
+		AA0000000000000000000039 /* Barlow-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000038 /* Barlow-Medium.ttf */; };
+		AA000000000000000000003B /* Barlow-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000003A /* Barlow-SemiBold.ttf */; };
+		AA000000000000000000003D /* BarlowCondensed-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000003C /* BarlowCondensed-Medium.ttf */; };
+		AA000000000000000000003F /* BarlowCondensed-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000003E /* BarlowCondensed-SemiBold.ttf */; };
+		AA0000000000000000000041 /* BarlowCondensed-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000040 /* BarlowCondensed-Bold.ttf */; };
+		AA000000000000000000000C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000000B /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		AA0000000000000000000012 /* ReturnGuardApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReturnGuardApp.swift; sourceTree = "<group>"; };
-		AA0000000000000000000014 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
-		AA0000000000000000000016 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
-		AA0000000000000000000018 /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
-		AA000000000000000000001A /* Components.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Components.swift; sourceTree = "<group>"; };
-		AA000000000000000000001C /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
-		AA000000000000000000001E /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
-		AA0000000000000000000020 /* PurchasesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasesView.swift; sourceTree = "<group>"; };
-		AA0000000000000000000022 /* WarrantiesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WarrantiesView.swift; sourceTree = "<group>"; };
-		AA0000000000000000000024 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
-		AA0000000000000000000026 /* PurchaseDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseDetailView.swift; sourceTree = "<group>"; };
-		AA0000000000000000000028 /* AddPurchaseSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPurchaseSheet.swift; sourceTree = "<group>"; };
-		AA000000000000000000002A /* ScanReceiptView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanReceiptView.swift; sourceTree = "<group>"; };
-		AA000000000000000000002C /* ConfirmReceiptView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmReceiptView.swift; sourceTree = "<group>"; };
-		AA000000000000000000000A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		AA0000000000000000000005 /* ReturnGuard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReturnGuard.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA0000000000000000000014 /* ReturnGuardApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReturnGuardApp.swift; sourceTree = "<group>"; };
+		AA0000000000000000000016 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		AA0000000000000000000018 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		AA000000000000000000001A /* Receipt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Receipt.swift; sourceTree = "<group>"; };
+		AA000000000000000000001C /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
+		AA000000000000000000001E /* Components.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Components.swift; sourceTree = "<group>"; };
+		AA0000000000000000000020 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		AA0000000000000000000022 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		AA0000000000000000000024 /* PurchasesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasesView.swift; sourceTree = "<group>"; };
+		AA0000000000000000000026 /* WarrantiesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WarrantiesView.swift; sourceTree = "<group>"; };
+		AA0000000000000000000028 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		AA000000000000000000002A /* PurchaseDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseDetailView.swift; sourceTree = "<group>"; };
+		AA000000000000000000002C /* AddPurchaseSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPurchaseSheet.swift; sourceTree = "<group>"; };
+		AA000000000000000000002E /* DocumentScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentScannerView.swift; sourceTree = "<group>"; };
+		AA0000000000000000000030 /* ReceiptOCR.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptOCR.swift; sourceTree = "<group>"; };
+		AA0000000000000000000032 /* ReceiptFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptFormView.swift; sourceTree = "<group>"; };
+		AA0000000000000000000034 /* ScanProcessingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanProcessingView.swift; sourceTree = "<group>"; };
+		AA0000000000000000000036 /* Barlow-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Barlow-Regular.ttf; sourceTree = "<group>"; };
+		AA0000000000000000000038 /* Barlow-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Barlow-Medium.ttf; sourceTree = "<group>"; };
+		AA000000000000000000003A /* Barlow-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Barlow-SemiBold.ttf; sourceTree = "<group>"; };
+		AA000000000000000000003C /* BarlowCondensed-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BarlowCondensed-Medium.ttf; sourceTree = "<group>"; };
+		AA000000000000000000003E /* BarlowCondensed-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BarlowCondensed-SemiBold.ttf; sourceTree = "<group>"; };
+		AA0000000000000000000040 /* BarlowCondensed-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BarlowCondensed-Bold.ttf; sourceTree = "<group>"; };
+		AA000000000000000000000B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		AA000000000000000000000D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AA0000000000000000000006 /* ReturnGuard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReturnGuard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		AA0000000000000000000008 /* Frameworks */ = {
+		AA0000000000000000000009 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -65,7 +84,7 @@
 		AA0000000000000000000003 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				AA0000000000000000000005 /* ReturnGuard.app */,
+				AA0000000000000000000006 /* ReturnGuard.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -73,35 +92,53 @@
 		AA0000000000000000000004 /* ReturnGuard */ = {
 			isa = PBXGroup;
 			children = (
-				AA0000000000000000000012 /* ReturnGuardApp.swift */,
-				AA0000000000000000000014 /* Theme.swift */,
-				AA0000000000000000000016 /* Models.swift */,
-				AA0000000000000000000018 /* AppModel.swift */,
-				AA000000000000000000001A /* Components.swift */,
-				AA000000000000000000001C /* RootView.swift */,
-				AA000000000000000000001E /* HomeView.swift */,
-				AA0000000000000000000020 /* PurchasesView.swift */,
-				AA0000000000000000000022 /* WarrantiesView.swift */,
-				AA0000000000000000000024 /* SettingsView.swift */,
-				AA0000000000000000000026 /* PurchaseDetailView.swift */,
-				AA0000000000000000000028 /* AddPurchaseSheet.swift */,
-				AA000000000000000000002A /* ScanReceiptView.swift */,
-				AA000000000000000000002C /* ConfirmReceiptView.swift */,
-				AA000000000000000000000A /* Assets.xcassets */,
+				AA0000000000000000000014 /* ReturnGuardApp.swift */,
+				AA0000000000000000000016 /* Theme.swift */,
+				AA0000000000000000000018 /* Models.swift */,
+				AA000000000000000000001A /* Receipt.swift */,
+				AA000000000000000000001C /* AppModel.swift */,
+				AA000000000000000000001E /* Components.swift */,
+				AA0000000000000000000020 /* RootView.swift */,
+				AA0000000000000000000022 /* HomeView.swift */,
+				AA0000000000000000000024 /* PurchasesView.swift */,
+				AA0000000000000000000026 /* WarrantiesView.swift */,
+				AA0000000000000000000028 /* SettingsView.swift */,
+				AA000000000000000000002A /* PurchaseDetailView.swift */,
+				AA000000000000000000002C /* AddPurchaseSheet.swift */,
+				AA000000000000000000002E /* DocumentScannerView.swift */,
+				AA0000000000000000000030 /* ReceiptOCR.swift */,
+				AA0000000000000000000032 /* ReceiptFormView.swift */,
+				AA0000000000000000000034 /* ScanProcessingView.swift */,
+				AA000000000000000000000B /* Assets.xcassets */,
+				AA000000000000000000000D /* Info.plist */,
+				AA0000000000000000000005 /* Fonts */,
 			);
 			path = ReturnGuard;
+			sourceTree = "<group>";
+		};
+		AA0000000000000000000005 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				AA0000000000000000000036 /* Barlow-Regular.ttf */,
+				AA0000000000000000000038 /* Barlow-Medium.ttf */,
+				AA000000000000000000003A /* Barlow-SemiBold.ttf */,
+				AA000000000000000000003C /* BarlowCondensed-Medium.ttf */,
+				AA000000000000000000003E /* BarlowCondensed-SemiBold.ttf */,
+				AA0000000000000000000040 /* BarlowCondensed-Bold.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		AA0000000000000000000006 /* ReturnGuard */ = {
+		AA0000000000000000000007 /* ReturnGuard */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = AA000000000000000000000F /* Build configuration list for PBXNativeTarget "ReturnGuard" */;
+			buildConfigurationList = AA0000000000000000000011 /* Build configuration list for PBXNativeTarget "ReturnGuard" */;
 			buildPhases = (
-				AA0000000000000000000007 /* Sources */,
-				AA0000000000000000000008 /* Frameworks */,
-				AA0000000000000000000009 /* Resources */,
+				AA0000000000000000000008 /* Sources */,
+				AA0000000000000000000009 /* Frameworks */,
+				AA000000000000000000000A /* Resources */,
 			);
 			buildRules = (
 			);
@@ -109,7 +146,7 @@
 			);
 			name = ReturnGuard;
 			productName = ReturnGuard;
-			productReference = AA0000000000000000000005 /* ReturnGuard.app */;
+			productReference = AA0000000000000000000006 /* ReturnGuard.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -122,12 +159,12 @@
 				LastSwiftUpdateCheck = 1600;
 				LastUpgradeCheck = 1600;
 				TargetAttributes = {
-					AA0000000000000000000006 = {
+					AA0000000000000000000007 = {
 						CreatedOnToolsVersion = 16.0;
 					};
 				};
 			};
-			buildConfigurationList = AA000000000000000000000C /* Build configuration list for PBXProject "ReturnGuard" */;
+			buildConfigurationList = AA000000000000000000000E /* Build configuration list for PBXProject "ReturnGuard" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -140,48 +177,57 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				AA0000000000000000000006 /* ReturnGuard */,
+				AA0000000000000000000007 /* ReturnGuard */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		AA0000000000000000000009 /* Resources */ = {
+		AA000000000000000000000A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AA000000000000000000000B /* Assets.xcassets in Resources */,
+				AA000000000000000000000C /* Assets.xcassets in Resources */,
+				AA0000000000000000000037 /* Barlow-Regular.ttf in Resources */,
+				AA0000000000000000000039 /* Barlow-Medium.ttf in Resources */,
+				AA000000000000000000003B /* Barlow-SemiBold.ttf in Resources */,
+				AA000000000000000000003D /* BarlowCondensed-Medium.ttf in Resources */,
+				AA000000000000000000003F /* BarlowCondensed-SemiBold.ttf in Resources */,
+				AA0000000000000000000041 /* BarlowCondensed-Bold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		AA0000000000000000000007 /* Sources */ = {
+		AA0000000000000000000008 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AA0000000000000000000013 /* ReturnGuardApp.swift in Sources */,
-				AA0000000000000000000015 /* Theme.swift in Sources */,
-				AA0000000000000000000017 /* Models.swift in Sources */,
-				AA0000000000000000000019 /* AppModel.swift in Sources */,
-				AA000000000000000000001B /* Components.swift in Sources */,
-				AA000000000000000000001D /* RootView.swift in Sources */,
-				AA000000000000000000001F /* HomeView.swift in Sources */,
-				AA0000000000000000000021 /* PurchasesView.swift in Sources */,
-				AA0000000000000000000023 /* WarrantiesView.swift in Sources */,
-				AA0000000000000000000025 /* SettingsView.swift in Sources */,
-				AA0000000000000000000027 /* PurchaseDetailView.swift in Sources */,
-				AA0000000000000000000029 /* AddPurchaseSheet.swift in Sources */,
-				AA000000000000000000002B /* ScanReceiptView.swift in Sources */,
-				AA000000000000000000002D /* ConfirmReceiptView.swift in Sources */,
+				AA0000000000000000000015 /* ReturnGuardApp.swift in Sources */,
+				AA0000000000000000000017 /* Theme.swift in Sources */,
+				AA0000000000000000000019 /* Models.swift in Sources */,
+				AA000000000000000000001B /* Receipt.swift in Sources */,
+				AA000000000000000000001D /* AppModel.swift in Sources */,
+				AA000000000000000000001F /* Components.swift in Sources */,
+				AA0000000000000000000021 /* RootView.swift in Sources */,
+				AA0000000000000000000023 /* HomeView.swift in Sources */,
+				AA0000000000000000000025 /* PurchasesView.swift in Sources */,
+				AA0000000000000000000027 /* WarrantiesView.swift in Sources */,
+				AA0000000000000000000029 /* SettingsView.swift in Sources */,
+				AA000000000000000000002B /* PurchaseDetailView.swift in Sources */,
+				AA000000000000000000002D /* AddPurchaseSheet.swift in Sources */,
+				AA000000000000000000002F /* DocumentScannerView.swift in Sources */,
+				AA0000000000000000000031 /* ReceiptOCR.swift in Sources */,
+				AA0000000000000000000033 /* ReceiptFormView.swift in Sources */,
+				AA0000000000000000000035 /* ScanProcessingView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		AA000000000000000000000D /* Debug */ = {
+		AA000000000000000000000F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -242,7 +288,7 @@
 			};
 			name = Debug;
 		};
-		AA000000000000000000000E /* Release */ = {
+		AA0000000000000000000010 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -296,7 +342,7 @@
 			};
 			name = Release;
 		};
-		AA0000000000000000000010 /* Debug */ = {
+		AA0000000000000000000012 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -304,14 +350,8 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "";
-				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = ReturnGuard/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -325,7 +365,7 @@
 			};
 			name = Debug;
 		};
-		AA0000000000000000000011 /* Release */ = {
+		AA0000000000000000000013 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -333,14 +373,8 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "";
-				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = ReturnGuard/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -357,20 +391,20 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		AA000000000000000000000C /* Build configuration list for PBXProject "ReturnGuard" */ = {
+		AA000000000000000000000E /* Build configuration list for PBXProject "ReturnGuard" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				AA000000000000000000000D /* Debug */,
-				AA000000000000000000000E /* Release */,
+				AA000000000000000000000F /* Debug */,
+				AA0000000000000000000010 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		AA000000000000000000000F /* Build configuration list for PBXNativeTarget "ReturnGuard" */ = {
+		AA0000000000000000000011 /* Build configuration list for PBXNativeTarget "ReturnGuard" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				AA0000000000000000000010 /* Debug */,
-				AA0000000000000000000011 /* Release */,
+				AA0000000000000000000012 /* Debug */,
+				AA0000000000000000000013 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
