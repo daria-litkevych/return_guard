@@ -7,6 +7,15 @@ to each purchase.
 
 ## What's implemented
 
+- **Onboarding** — the three intro slides from the design ("Never miss a
+  return deadline again" → "Snap your receipt" → "We'll remind you before
+  it's too late" / "Get started"), shown once on first launch and gated by
+  a persisted flag. No account, sign-up, or sign-in anywhere — this is
+  deliberate, matching the "No account needed" line on the last slide
+  (echoed again in Settings and the add-purchase sheet). If you want real
+  account creation instead, that's a different, larger feature — it would
+  need a backend decision and contradicts the "no account needed" branding
+  throughout the current app, so it wasn't assumed.
 - **Persistence** — purchases are stored with SwiftData and survive
   relaunch. Sample data seeds automatically exactly once per install (gated
   on a persisted flag, not just an in-memory check — see commit history for
@@ -84,6 +93,17 @@ installed, not just the Command Line Tools:
   across relaunches (tripled purchases), traced to gating seeding on an
   in-memory check instead of a persisted flag — see
   `AppModel.seedIfNeeded()`.
+- Onboarding originally used `TabView(selection:)` with `.page` style.
+  While testing, swipe-driven paging worked but tapping "Continue" appeared
+  not to (a pattern that matches a real, commonly-reported SwiftUI
+  TabView/.page quirk) — but the repro turned out inconclusive: after
+  switching to a plain `@State`-driven `ZStack` instead (simpler either
+  way, so kept), the *same* tap coordinates still missed the button until
+  recalibrated, meaning the original failure may just as well have been
+  bad tap coordinates on my end rather than a real TabView bug. Flagging
+  the uncertainty rather than the more confident story, since I couldn't
+  actually isolate the variable. All three slides and the transition into
+  the main app are verified working now either way.
 
 **Not verifiable in Simulator** (no camera hardware, and this
 environment's simulator auto-resolves permission prompts without showing

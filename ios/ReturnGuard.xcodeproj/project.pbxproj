@@ -26,12 +26,14 @@
 		AA0000000000000000000035 /* ScanProcessingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000034 /* ScanProcessingView.swift */; };
 		AA0000000000000000000037 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000036 /* NotificationManager.swift */; };
 		AA0000000000000000000039 /* StoreIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000038 /* StoreIcon.swift */; };
-		AA000000000000000000003B /* Barlow-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000003A /* Barlow-Regular.ttf */; };
-		AA000000000000000000003D /* Barlow-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000003C /* Barlow-Medium.ttf */; };
-		AA000000000000000000003F /* Barlow-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000003E /* Barlow-SemiBold.ttf */; };
-		AA0000000000000000000041 /* BarlowCondensed-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000040 /* BarlowCondensed-Medium.ttf */; };
-		AA0000000000000000000043 /* BarlowCondensed-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000042 /* BarlowCondensed-SemiBold.ttf */; };
-		AA0000000000000000000045 /* BarlowCondensed-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000044 /* BarlowCondensed-Bold.ttf */; };
+		AA000000000000000000003B /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000003A /* OnboardingView.swift */; };
+		AA000000000000000000003D /* AppRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000003C /* AppRootView.swift */; };
+		AA000000000000000000003F /* Barlow-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000003E /* Barlow-Regular.ttf */; };
+		AA0000000000000000000041 /* Barlow-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000040 /* Barlow-Medium.ttf */; };
+		AA0000000000000000000043 /* Barlow-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000042 /* Barlow-SemiBold.ttf */; };
+		AA0000000000000000000045 /* BarlowCondensed-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000044 /* BarlowCondensed-Medium.ttf */; };
+		AA0000000000000000000047 /* BarlowCondensed-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000046 /* BarlowCondensed-SemiBold.ttf */; };
+		AA0000000000000000000049 /* BarlowCondensed-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000048 /* BarlowCondensed-Bold.ttf */; };
 		AA000000000000000000000C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000000B /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
@@ -55,12 +57,14 @@
 		AA0000000000000000000034 /* ScanProcessingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanProcessingView.swift; sourceTree = "<group>"; };
 		AA0000000000000000000036 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		AA0000000000000000000038 /* StoreIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreIcon.swift; sourceTree = "<group>"; };
-		AA000000000000000000003A /* Barlow-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Barlow-Regular.ttf; sourceTree = "<group>"; };
-		AA000000000000000000003C /* Barlow-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Barlow-Medium.ttf; sourceTree = "<group>"; };
-		AA000000000000000000003E /* Barlow-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Barlow-SemiBold.ttf; sourceTree = "<group>"; };
-		AA0000000000000000000040 /* BarlowCondensed-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BarlowCondensed-Medium.ttf; sourceTree = "<group>"; };
-		AA0000000000000000000042 /* BarlowCondensed-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BarlowCondensed-SemiBold.ttf; sourceTree = "<group>"; };
-		AA0000000000000000000044 /* BarlowCondensed-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BarlowCondensed-Bold.ttf; sourceTree = "<group>"; };
+		AA000000000000000000003A /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		AA000000000000000000003C /* AppRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRootView.swift; sourceTree = "<group>"; };
+		AA000000000000000000003E /* Barlow-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Barlow-Regular.ttf; sourceTree = "<group>"; };
+		AA0000000000000000000040 /* Barlow-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Barlow-Medium.ttf; sourceTree = "<group>"; };
+		AA0000000000000000000042 /* Barlow-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Barlow-SemiBold.ttf; sourceTree = "<group>"; };
+		AA0000000000000000000044 /* BarlowCondensed-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BarlowCondensed-Medium.ttf; sourceTree = "<group>"; };
+		AA0000000000000000000046 /* BarlowCondensed-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BarlowCondensed-SemiBold.ttf; sourceTree = "<group>"; };
+		AA0000000000000000000048 /* BarlowCondensed-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BarlowCondensed-Bold.ttf; sourceTree = "<group>"; };
 		AA000000000000000000000B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AA000000000000000000000D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AA0000000000000000000006 /* ReturnGuard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReturnGuard.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -115,6 +119,8 @@
 				AA0000000000000000000034 /* ScanProcessingView.swift */,
 				AA0000000000000000000036 /* NotificationManager.swift */,
 				AA0000000000000000000038 /* StoreIcon.swift */,
+				AA000000000000000000003A /* OnboardingView.swift */,
+				AA000000000000000000003C /* AppRootView.swift */,
 				AA000000000000000000000B /* Assets.xcassets */,
 				AA000000000000000000000D /* Info.plist */,
 				AA0000000000000000000005 /* Fonts */,
@@ -125,12 +131,12 @@
 		AA0000000000000000000005 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				AA000000000000000000003A /* Barlow-Regular.ttf */,
-				AA000000000000000000003C /* Barlow-Medium.ttf */,
-				AA000000000000000000003E /* Barlow-SemiBold.ttf */,
-				AA0000000000000000000040 /* BarlowCondensed-Medium.ttf */,
-				AA0000000000000000000042 /* BarlowCondensed-SemiBold.ttf */,
-				AA0000000000000000000044 /* BarlowCondensed-Bold.ttf */,
+				AA000000000000000000003E /* Barlow-Regular.ttf */,
+				AA0000000000000000000040 /* Barlow-Medium.ttf */,
+				AA0000000000000000000042 /* Barlow-SemiBold.ttf */,
+				AA0000000000000000000044 /* BarlowCondensed-Medium.ttf */,
+				AA0000000000000000000046 /* BarlowCondensed-SemiBold.ttf */,
+				AA0000000000000000000048 /* BarlowCondensed-Bold.ttf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -194,12 +200,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA000000000000000000000C /* Assets.xcassets in Resources */,
-				AA000000000000000000003B /* Barlow-Regular.ttf in Resources */,
-				AA000000000000000000003D /* Barlow-Medium.ttf in Resources */,
-				AA000000000000000000003F /* Barlow-SemiBold.ttf in Resources */,
-				AA0000000000000000000041 /* BarlowCondensed-Medium.ttf in Resources */,
-				AA0000000000000000000043 /* BarlowCondensed-SemiBold.ttf in Resources */,
-				AA0000000000000000000045 /* BarlowCondensed-Bold.ttf in Resources */,
+				AA000000000000000000003F /* Barlow-Regular.ttf in Resources */,
+				AA0000000000000000000041 /* Barlow-Medium.ttf in Resources */,
+				AA0000000000000000000043 /* Barlow-SemiBold.ttf in Resources */,
+				AA0000000000000000000045 /* BarlowCondensed-Medium.ttf in Resources */,
+				AA0000000000000000000047 /* BarlowCondensed-SemiBold.ttf in Resources */,
+				AA0000000000000000000049 /* BarlowCondensed-Bold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -229,6 +235,8 @@
 				AA0000000000000000000035 /* ScanProcessingView.swift in Sources */,
 				AA0000000000000000000037 /* NotificationManager.swift in Sources */,
 				AA0000000000000000000039 /* StoreIcon.swift in Sources */,
+				AA000000000000000000003B /* OnboardingView.swift in Sources */,
+				AA000000000000000000003D /* AppRootView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

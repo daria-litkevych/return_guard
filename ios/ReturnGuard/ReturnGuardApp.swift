@@ -12,7 +12,7 @@ struct ReturnGuardApp: App {
 
     var body: some Scene {
         WindowGroup {
-            RootView()
+            AppRootView()
                 .preferredColorScheme(.light)
         }
         .modelContainer(for: Purchase.self)
