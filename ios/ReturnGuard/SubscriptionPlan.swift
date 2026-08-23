@@ -15,7 +15,7 @@ enum SubscriptionPlan: String, CaseIterable, Identifiable {
 
     var subtitle: String {
         switch self {
-        case .yearly: return "€2.50 / month · save 50%"
+        case .yearly: return "€1.25 / month · save 37%"
         case .monthly: return "Cancel anytime"
         case .lifetime: return "One payment, forever"
         }
@@ -24,9 +24,9 @@ enum SubscriptionPlan: String, CaseIterable, Identifiable {
     /// Fallback only, used if StoreKit's real product price hasn't loaded yet.
     var priceLabel: String {
         switch self {
-        case .yearly: return "€29.99"
-        case .monthly: return "€4.99"
-        case .lifetime: return "€49.99"
+        case .yearly: return "€14.99"
+        case .monthly: return "€1.99"
+        case .lifetime: return "€29.99"
         }
     }
 }

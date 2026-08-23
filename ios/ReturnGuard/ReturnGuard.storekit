@@ -3,7 +3,7 @@
   "nonRenewingSubscriptions" : [],
   "products" : [
     {
-      "displayPrice" : "49.99",
+      "displayPrice" : "29.99",
       "familyShareable" : false,
       "internalID" : "44AFE8A9",
       "localizations" : [
@@ -35,14 +35,14 @@
         {
           "adHocOffers" : [],
           "codeOffers" : [],
-          "displayPrice" : "29.99",
+          "displayPrice" : "14.99",
           "familyShareable" : false,
           "groupNumber" : 1,
           "internalID" : "CFA8AB10",
           "introductoryOffer" : null,
           "localizations" : [
             {
-              "description" : "€2.50 / month, billed yearly.",
+              "description" : "€1.25 / month, billed yearly.",
               "displayName" : "Premium Yearly",
               "locale" : "en_US"
             }
@@ -57,7 +57,7 @@
         {
           "adHocOffers" : [],
           "codeOffers" : [],
-          "displayPrice" : "4.99",
+          "displayPrice" : "1.99",
           "familyShareable" : false,
           "groupNumber" : 1,
           "internalID" : "9B2C1E7A",
