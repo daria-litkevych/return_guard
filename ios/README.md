@@ -7,22 +7,47 @@ to each purchase.
 
 ## What's implemented
 
-- **Free plan limit + paywall** — the free plan tracks up to
-  `AppModel.freePurchaseLimit` (3) *active* (not-yet-returned) purchases;
-  returning one frees up a slot. Tapping "Add purchase" past that limit
-  shows `PaywallView` (from the design's "Paywall" turn — feature list,
-  Yearly/Monthly/Lifetime plans, "Best value" on Yearly) instead of the
-  add-purchase sheet. **No real payment processing** — there's no App
-  Store Connect product configuration or StoreKit integration behind it,
-  and this environment can't build/run via Xcode's own Run action, which
-  real StoreKit Testing requires (headless `xcodebuild` + `simctl launch`
-  can't exercise it). Tapping a plan just flips a local `isPremium` flag
-  to demonstrate the gate lifting — Settings' Subscription row reflects
-  it ("Premium · yearly"). Wiring up real in-app purchases is separate,
-  larger follow-up work (App Store Connect products, StoreKit 2,
-  entitlement verification). Verified end-to-end in Simulator: hitting
-  the limit shows the paywall, "Not now" dismisses it, subscribing lifts
-  the gate and updates Settings.
+- **Free plan limit + paywall, backed by real StoreKit 2** — the free plan
+  tracks up to `AppModel.freePurchaseLimit` (3) *active* (not-yet-returned)
+  purchases; returning one frees up a slot. Tapping "Add purchase" past
+  that limit shows `PaywallView` (from the design's "Paywall" turn —
+  feature list, Yearly/Monthly/Lifetime plans, "Best value" on Yearly)
+  instead of the add-purchase sheet.
+
+  `StoreManager.swift` is real `StoreKit 2` — `Product.products(for:)`,
+  `product.purchase()`, listening to `Transaction.updates`, computing
+  `isPremium` from `Transaction.currentEntitlements` — backed by
+  `ReturnGuard.storekit`, a local StoreKit Testing configuration (3
+  products: yearly/monthly subscriptions in one group, a lifetime
+  non-consumable) wired into the checked-in Xcode scheme
+  (`ReturnGuard.xcodeproj/xcshareddata/xcschemes/ReturnGuard.xcscheme`),
+  so opening this in Xcode and pressing **Run** gets local StoreKit
+  Testing for free — no setup, no App Store Connect account, no real
+  money, real purchase UI (Apple's own sandbox sheet) end to end.
+
+  An earlier version tried to bootstrap that same `.storekit` file from
+  app code via `SKTestSession(configurationFileNamed:)`, specifically so
+  it would work under this environment's `simctl launch` (which can't use
+  Xcode's Run action). That's a real, documented API — but it turned out
+  to hard-crash (`SIGABRT` inside `-[SKTestSession bundleID]`) unless
+  launched from an actual XCTest hosting context, confirmed by reading
+  the crash log this environment produced. It's a testing-target tool,
+  not a general application-code one, regardless of what some examples
+  imply. Removed in favor of the scheme-based route above, which is what
+  Apple actually documents. Net effect: in this environment,
+  `Product.products(for:)` has no StoreKit Configuration to resolve
+  against and no real App Store Connect products exist under these IDs
+  either, so it correctly returns empty rather than crashing or faking
+  data — verified in Simulator: the paywall renders (with fallback
+  hardcoded prices, since no real `Product` data loaded), and the
+  purchase button is correctly *disabled* rather than silently no-oping
+  or pretending to succeed. The full purchase flow — real prices, Apple's
+  purchase sheet, entitlements actually unlocking premium — only runs
+  where the environment can support it: **Xcode's Run button**, which
+  this one doesn't have.
+- Settings: Subscription row reflects real `isPremium`/`activePlan`
+  state, and "Restore purchases" calls the real `AppStore.sync()` +
+  entitlement refresh.
 - **Onboarding** — the three intro slides from the design ("Never miss a
   return deadline again" → "Snap your receipt" → "We'll remind you before
   it's too late" / "Get started"), shown once on first launch and gated by
@@ -82,7 +107,8 @@ to each purchase.
 
 ## Not yet implemented
 
-- Account/subscription/help/about rows in Settings are still inert.
+- Account/help/about rows in Settings are still inert (Subscription and
+  Restore purchases are real now, see above).
 - No backend or cross-device sync — SwiftData is local to the device.
 - No batching of same-day reminders across multiple purchases (the
   design's "reminders for the same day are batched into one" — each
@@ -109,6 +135,14 @@ installed, not just the Command Line Tools:
   across relaunches (tripled purchases), traced to gating seeding on an
   in-memory check instead of a persisted flag — see
   `AppModel.seedIfNeeded()`.
+- Confirmed a real crash this way, not just inferred it: `SKTestSession
+  (configurationFileNamed:)` called from plain app code hard-crashes
+  (`SIGABRT`) outside an XCTest hosting context — this environment
+  produced an actual crash log pinpointing it to
+  `-[SKTestSession bundleID]`. That's what settled StoreManager's design
+  on the scheme-based StoreKit Configuration instead (see "What's
+  implemented" above) rather than trusting an untested assumption either
+  way.
 - Onboarding originally used `TabView(selection:)` with `.page` style.
   While testing, swipe-driven paging worked but tapping "Continue" appeared
   not to (a pattern that matches a real, commonly-reported SwiftUI
@@ -121,9 +155,9 @@ installed, not just the Command Line Tools:
   actually isolate the variable. All three slides and the transition into
   the main app are verified working now either way.
 
-**Not verifiable in Simulator** (no camera hardware, and this
-environment's simulator auto-resolves permission prompts without showing
-them interactively):
+**Not verifiable in this environment** (no Xcode GUI, no camera hardware,
+and this environment's simulator auto-resolves permission prompts without
+showing them interactively):
 - The actual VisionKit camera capture + Vision OCR pipeline — code review
   and cross-checking against Apple's documented API shapes is as far as
   this environment could verify.
@@ -132,8 +166,16 @@ them interactively):
   exercised, but every request in this environment resolved instantly
   without a visible dialog (denied), so a scheduled notification actually
   arriving has not been observed end-to-end.
+- The real purchase flow end to end (Apple's purchase confirmation sheet,
+  a successful test purchase, `isPremium` actually flipping true from a
+  real `Transaction`) — needs Xcode's Run action for the scheme's
+  StoreKit Configuration to activate, which this environment doesn't
+  have. What *is* verified here: the paywall renders correctly, and with
+  no StoreKit Configuration active (as in this environment) the purchase
+  button correctly disables itself rather than crashing or faking a sale.
 
-Both are worth a real first-run check on your physical iPhone.
+All three are worth a real first-run check on your physical iPhone (or
+just Xcode's Simulator, run the normal way, for the StoreKit one).
 
 ## Run it on your iPhone
 
@@ -151,6 +193,12 @@ Both are worth a real first-run check on your physical iPhone.
    Notifications in Settings prompts for notification permission the same
    way. Store logos need network access — they'll silently fall back to
    monograms if you're offline.
+7. Hitting the free-plan limit and tapping a plan on the paywall gets you
+   Apple's real (local, test-only) purchase sheet — the checked-in scheme
+   already points Xcode at `ReturnGuard.storekit`, so this works with no
+   setup. StoreKit Testing only activates through Xcode's own Run button
+   (⌘R) — a plain reinstall from Finder/TestFlight-style sideloading
+   won't have it wired up.
 
 A free-account build expires after 7 days — reopen Xcode and hit Run again
 to reinstall it.

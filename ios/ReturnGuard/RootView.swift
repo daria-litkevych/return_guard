@@ -61,9 +61,12 @@ struct RootView: View {
             .ignoresSafeArea()
         }
         .fullScreenCover(isPresented: $model.showPaywall) {
-            PaywallView().environmentObject(model)
+            PaywallView()
+                .environmentObject(model)
+                .environmentObject(model.store)
         }
         .environmentObject(model)
+        .environmentObject(model.store)
         .onAppear {
             model.modelContext = modelContext
             model.sync(purchases)

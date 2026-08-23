@@ -1,18 +1,16 @@
 import SwiftUI
+import StoreKit
 
 /// From the design's "Paywall" turn, adapted to the free-plan limit
 /// (originally "5 active purchases", now `AppModel.freePurchaseLimit`).
-///
-/// No real payment processing: there's no App Store Connect product
-/// configuration or StoreKit integration behind this (and this
-/// environment has no way to build/run via Xcode's own Run action, which
-/// is what real StoreKit Testing requires — a headless `xcodebuild` +
-/// `simctl launch` can't exercise it). Tapping a plan just flips a local
-/// `isPremium` flag to demonstrate the gating behavior. Wiring up real
-/// in-app purchases is separate follow-up work.
+/// Backed by real StoreKit 2 purchasing via `StoreManager` — see its
+/// header comment for how that works without real App Store Connect
+/// products or Xcode's own Run action, which this environment can't use.
 struct PaywallView: View {
     @EnvironmentObject var model: AppModel
+    @EnvironmentObject var store: StoreManager
     @State private var selectedPlan: SubscriptionPlan = .yearly
+    @State private var isPurchasing = false
 
     var body: some View {
         VStack(spacing: 0) {
@@ -46,12 +44,28 @@ struct PaywallView: View {
                     .rgCard(padding: 0)
                     .padding(.top, 20)
 
-                    VStack(spacing: 10) {
-                        ForEach(SubscriptionPlan.allCases) { plan in
-                            planRow(plan)
+                    if store.isLoadingProducts {
+                        HStack {
+                            Spacer()
+                            ProgressView().tint(RG.accent)
+                            Spacer()
                         }
+                        .padding(.top, 30)
+                    } else {
+                        VStack(spacing: 10) {
+                            ForEach(SubscriptionPlan.allCases) { plan in
+                                planRow(plan)
+                            }
+                        }
+                        .padding(.top, 22)
                     }
-                    .padding(.top, 22)
+
+                    if let error = store.purchaseError {
+                        Text(error)
+                            .font(.rgBody(13))
+                            .foregroundStyle(RG.urgent)
+                            .padding(.top, 12)
+                    }
                 }
                 .padding(.horizontal, 22)
                 .padding(.bottom, 16)
@@ -59,19 +73,26 @@ struct PaywallView: View {
 
             VStack(spacing: 12) {
                 Button {
-                    model.subscribe(to: selectedPlan)
+                    purchase()
                 } label: {
-                    Text(selectedPlan.ctaLabel)
-                        .font(.rgHeading(16))
-                        .foregroundStyle(.white)
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 15)
-                        .background(Capsule().fill(RG.accent))
-                        .shadow(color: RG.accent.opacity(0.32), radius: 12, x: 0, y: 6)
+                    ZStack {
+                        Text(ctaLabel)
+                            .opacity(isPurchasing ? 0 : 1)
+                        if isPurchasing {
+                            ProgressView().tint(.white)
+                        }
+                    }
+                    .font(.rgHeading(16))
+                    .foregroundStyle(.white)
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 15)
+                    .background(Capsule().fill(RG.accent))
+                    .shadow(color: RG.accent.opacity(0.32), radius: 12, x: 0, y: 6)
                 }
+                .disabled(isPurchasing || store.product(for: selectedPlan) == nil)
 
                 HStack(spacing: 18) {
-                    Text("Restore")
+                    Button("Restore") { Task { await store.restore() } }
                     Text("Terms")
                     Text("Privacy")
                 }
@@ -83,6 +104,22 @@ struct PaywallView: View {
             .padding(.bottom, 26)
         }
         .background(RG.background.ignoresSafeArea())
+        .onChange(of: store.isPremium) { _, isPremium in
+            if isPremium { model.dismissPaywall() }
+        }
+    }
+
+    private var ctaLabel: String {
+        let price = store.product(for: selectedPlan)?.displayPrice ?? selectedPlan.priceLabel
+        return "Continue \(selectedPlan.rawValue) · \(price)"
+    }
+
+    private func purchase() {
+        isPurchasing = true
+        Task {
+            await store.purchase(selectedPlan)
+            isPurchasing = false
+        }
     }
 
     private func featureRow(title: String, subtitle: String) -> some View {
@@ -100,6 +137,7 @@ struct PaywallView: View {
 
     private func planRow(_ plan: SubscriptionPlan) -> some View {
         let selected = selectedPlan == plan
+        let priceLabel = store.product(for: plan)?.displayPrice ?? plan.priceLabel
         return Button {
             selectedPlan = plan
         } label: {
@@ -109,7 +147,7 @@ struct PaywallView: View {
                     Text(plan.subtitle).font(.rgBody(14)).foregroundStyle(RG.textSecondary)
                 }
                 Spacer()
-                Text(plan.priceLabel).font(.rgHeading(22)).foregroundStyle(RG.ink)
+                Text(priceLabel).font(.rgHeading(22)).foregroundStyle(RG.ink)
             }
             .padding(18)
             .background(RG.surface)

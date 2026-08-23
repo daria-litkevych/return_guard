@@ -21,16 +21,13 @@ final class AppModel: ObservableObject {
     @Published var scanErrorMessage: String?
     @Published var showPaywall = false
 
-    /// Not backed by `@AppStorage` — this is a plain ObservableObject, not
-    /// a View, so `@AppStorage` wouldn't reliably notify SwiftUI of changes
-    /// made from inside AppModel's own methods. Loaded from UserDefaults at
-    /// init and written back on every change instead.
-    @Published var isPremium: Bool = UserDefaults.standard.bool(forKey: "isPremium") {
-        didSet { UserDefaults.standard.set(isPremium, forKey: "isPremium") }
-    }
-    @Published var premiumPlanID: String? = UserDefaults.standard.string(forKey: "premiumPlanID") {
-        didSet { UserDefaults.standard.set(premiumPlanID, forKey: "premiumPlanID") }
-    }
+    /// Real StoreKit 2 purchasing (see StoreManager's header comment for
+    /// how it's backed by a local test session in DEBUG builds). Exposed
+    /// as its own environment object too (RootView adds it separately) so
+    /// views that need to react to product/purchase state changes —
+    /// PaywallView, Settings' Subscription row — observe it directly
+    /// rather than through this passthrough.
+    let store = StoreManager()
 
     /// Matches the design's paywall copy ("N active purchases" on the free
     /// plan), just with the limit lowered to 3.
@@ -40,7 +37,7 @@ final class AppModel: ObservableObject {
     /// matching the design's "active purchases" phrasing rather than
     /// counting everything ever added.
     var activePurchaseCount: Int { purchases.filter { !$0.returned }.count }
-    var hasReachedFreeLimit: Bool { !isPremium && activePurchaseCount >= Self.freePurchaseLimit }
+    var hasReachedFreeLimit: Bool { !store.isPremium && activePurchaseCount >= Self.freePurchaseLimit }
 
     var modelContext: ModelContext?
 
@@ -82,14 +79,6 @@ final class AppModel: ObservableObject {
     }
 
     func dismissPaywall() {
-        showPaywall = false
-    }
-
-    /// Simulated unlock — see PaywallView's header comment for why there's
-    /// no real StoreKit purchase behind this.
-    func subscribe(to plan: SubscriptionPlan) {
-        isPremium = true
-        premiumPlanID = plan.id
         showPaywall = false
     }
 

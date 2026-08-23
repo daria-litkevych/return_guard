@@ -21,15 +21,12 @@ enum SubscriptionPlan: String, CaseIterable, Identifiable {
         }
     }
 
+    /// Fallback only, used if StoreKit's real product price hasn't loaded yet.
     var priceLabel: String {
         switch self {
         case .yearly: return "€29.99"
         case .monthly: return "€4.99"
         case .lifetime: return "€49.99"
         }
-    }
-
-    var ctaLabel: String {
-        "Continue \(rawValue) · \(priceLabel)"
     }
 }

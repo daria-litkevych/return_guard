@@ -2,9 +2,11 @@ import SwiftUI
 
 struct SettingsView: View {
     @EnvironmentObject var model: AppModel
+    @EnvironmentObject var store: StoreManager
     @AppStorage(NotificationManager.notificationsEnabledKey) private var notificationsOn = true
     @State private var showDeleteConfirm = false
     @State private var showNotificationsDeniedAlert = false
+    @State private var isRestoring = false
 
     var body: some View {
         ScrollView {
@@ -65,7 +67,7 @@ struct SettingsView: View {
                     settingsRow("Account")
                     RowDivider().padding(.horizontal, 12)
                     Button {
-                        if !model.isPremium { model.showPaywall = true }
+                        if !store.isPremium { model.showPaywall = true }
                     } label: {
                         HStack {
                             Text("Subscription").font(.rgBody(15)).foregroundStyle(RG.ink)
@@ -77,7 +79,23 @@ struct SettingsView: View {
                     }
                     .buttonStyle(.plain)
                     RowDivider().padding(.horizontal, 12)
-                    settingsRow("Restore purchases")
+                    Button {
+                        isRestoring = true
+                        Task {
+                            await store.restore()
+                            isRestoring = false
+                        }
+                    } label: {
+                        HStack {
+                            Text("Restore purchases").font(.rgBody(15)).foregroundStyle(RG.ink)
+                            Spacer()
+                            if isRestoring { ProgressView() }
+                        }
+                        .padding(12)
+                        .contentShape(Rectangle())
+                    }
+                    .buttonStyle(.plain)
+                    .disabled(isRestoring)
                     RowDivider().padding(.horizontal, 12)
 
                     ShareLink(item: model.exportURL()) {
@@ -128,9 +146,8 @@ struct SettingsView: View {
     }
 
     private var subscriptionLabel: String {
-        guard model.isPremium else { return "Free plan" }
-        let plan = SubscriptionPlan(rawValue: model.premiumPlanID ?? "")
-        return "Premium · \(plan?.title.lowercased() ?? "")"
+        guard store.isPremium else { return "Free plan" }
+        return "Premium · \(store.activePlan?.title.lowercased() ?? "")"
     }
 
     private func settingsRow(_ text: String, color: Color = RG.ink) -> some View {
