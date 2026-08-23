@@ -7,6 +7,22 @@ to each purchase.
 
 ## What's implemented
 
+- **Free plan limit + paywall** — the free plan tracks up to
+  `AppModel.freePurchaseLimit` (3) *active* (not-yet-returned) purchases;
+  returning one frees up a slot. Tapping "Add purchase" past that limit
+  shows `PaywallView` (from the design's "Paywall" turn — feature list,
+  Yearly/Monthly/Lifetime plans, "Best value" on Yearly) instead of the
+  add-purchase sheet. **No real payment processing** — there's no App
+  Store Connect product configuration or StoreKit integration behind it,
+  and this environment can't build/run via Xcode's own Run action, which
+  real StoreKit Testing requires (headless `xcodebuild` + `simctl launch`
+  can't exercise it). Tapping a plan just flips a local `isPremium` flag
+  to demonstrate the gate lifting — Settings' Subscription row reflects
+  it ("Premium · yearly"). Wiring up real in-app purchases is separate,
+  larger follow-up work (App Store Connect products, StoreKit 2,
+  entitlement verification). Verified end-to-end in Simulator: hitting
+  the limit shows the paywall, "Not now" dismisses it, subscribing lifts
+  the gate and updates Settings.
 - **Onboarding** — the three intro slides from the design ("Never miss a
   return deadline again" → "Snap your receipt" → "We'll remind you before
   it's too late" / "Get started"), shown once on first launch and gated by

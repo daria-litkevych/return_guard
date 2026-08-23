@@ -60,6 +60,9 @@ struct RootView: View {
             )
             .ignoresSafeArea()
         }
+        .fullScreenCover(isPresented: $model.showPaywall) {
+            PaywallView().environmentObject(model)
+        }
         .environmentObject(model)
         .onAppear {
             model.modelContext = modelContext

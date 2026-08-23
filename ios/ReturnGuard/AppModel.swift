@@ -19,6 +19,28 @@ final class AppModel: ObservableObject {
     @Published var scanPhase: ScanPhase = .idle
     @Published var draft = ReceiptDraft()
     @Published var scanErrorMessage: String?
+    @Published var showPaywall = false
+
+    /// Not backed by `@AppStorage` — this is a plain ObservableObject, not
+    /// a View, so `@AppStorage` wouldn't reliably notify SwiftUI of changes
+    /// made from inside AppModel's own methods. Loaded from UserDefaults at
+    /// init and written back on every change instead.
+    @Published var isPremium: Bool = UserDefaults.standard.bool(forKey: "isPremium") {
+        didSet { UserDefaults.standard.set(isPremium, forKey: "isPremium") }
+    }
+    @Published var premiumPlanID: String? = UserDefaults.standard.string(forKey: "premiumPlanID") {
+        didSet { UserDefaults.standard.set(premiumPlanID, forKey: "premiumPlanID") }
+    }
+
+    /// Matches the design's paywall copy ("N active purchases" on the free
+    /// plan), just with the limit lowered to 3.
+    static let freePurchaseLimit = 3
+
+    /// "Active" = not yet returned — a returned purchase frees up a slot,
+    /// matching the design's "active purchases" phrasing rather than
+    /// counting everything ever added.
+    var activePurchaseCount: Int { purchases.filter { !$0.returned }.count }
+    var hasReachedFreeLimit: Bool { !isPremium && activePurchaseCount >= Self.freePurchaseLimit }
 
     var modelContext: ModelContext?
 
@@ -52,7 +74,23 @@ final class AppModel: ObservableObject {
     // MARK: Add purchase sheet
 
     func openAddSheet() {
-        showAddSheet = true
+        if hasReachedFreeLimit {
+            showPaywall = true
+        } else {
+            showAddSheet = true
+        }
+    }
+
+    func dismissPaywall() {
+        showPaywall = false
+    }
+
+    /// Simulated unlock — see PaywallView's header comment for why there's
+    /// no real StoreKit purchase behind this.
+    func subscribe(to plan: SubscriptionPlan) {
+        isPremium = true
+        premiumPlanID = plan.id
+        showPaywall = false
     }
 
     func startScan() {

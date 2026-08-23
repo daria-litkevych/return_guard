@@ -64,12 +64,18 @@ struct SettingsView: View {
                 VStack(spacing: 0) {
                     settingsRow("Account")
                     RowDivider().padding(.horizontal, 12)
-                    HStack {
-                        Text("Subscription").font(.rgBody(15)).foregroundStyle(RG.ink)
-                        Spacer()
-                        Text("Free plan").font(.rgBody(14, weight: .medium)).foregroundStyle(RG.accentDeep)
+                    Button {
+                        if !model.isPremium { model.showPaywall = true }
+                    } label: {
+                        HStack {
+                            Text("Subscription").font(.rgBody(15)).foregroundStyle(RG.ink)
+                            Spacer()
+                            Text(subscriptionLabel).font(.rgBody(14, weight: .medium)).foregroundStyle(RG.accentDeep)
+                        }
+                        .padding(12)
+                        .contentShape(Rectangle())
                     }
-                    .padding(12)
+                    .buttonStyle(.plain)
                     RowDivider().padding(.horizontal, 12)
                     settingsRow("Restore purchases")
                     RowDivider().padding(.horizontal, 12)
@@ -119,6 +125,12 @@ struct SettingsView: View {
         } message: {
             Text("Turn on notifications for ReturnGuard in iOS Settings to get return reminders.")
         }
+    }
+
+    private var subscriptionLabel: String {
+        guard model.isPremium else { return "Free plan" }
+        let plan = SubscriptionPlan(rawValue: model.premiumPlanID ?? "")
+        return "Premium · \(plan?.title.lowercased() ?? "")"
     }
 
     private func settingsRow(_ text: String, color: Color = RG.ink) -> some View {
