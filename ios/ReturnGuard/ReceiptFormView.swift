@@ -24,7 +24,13 @@ struct ReceiptFormView: View {
                 VStack(spacing: 0) {
                     formField("Product", text: $model.draft.product, placeholder: "e.g. Sony WH-1000XM6", field: .product)
                     RowDivider().padding(.horizontal, 14)
-                    formField("Store", text: $model.draft.store, placeholder: "e.g. Amazon", field: .store)
+                    HStack(spacing: 12) {
+                        formField("Store", text: $model.draft.store, placeholder: "e.g. Amazon", field: .store)
+                        if !model.draft.store.trimmingCharacters(in: .whitespaces).isEmpty {
+                            StoreIcon(store: model.draft.store, size: 34, cornerRadius: 10)
+                                .padding(.trailing, 14)
+                        }
+                    }
                     RowDivider().padding(.horizontal, 14)
                     formField("Price", text: $model.draft.priceText, placeholder: "0.00", field: .price, keyboard: .decimalPad)
                     RowDivider().padding(.horizontal, 14)
@@ -88,6 +94,7 @@ struct ReceiptFormView: View {
                 .keyboardType(keyboard)
                 .focused($focusedField, equals: field)
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
         .padding(.horizontal, 14)
         .padding(.vertical, 12)
     }

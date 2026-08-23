@@ -97,7 +97,7 @@ private struct ReturningSoonCard: View {
     let purchase: Purchase
     var body: some View {
         HStack(spacing: 14) {
-            PlaceholderThumb(label: "PRODUCT\nSHOT").frame(width: 58, height: 58)
+            StoreIcon(store: purchase.store, size: 58, cornerRadius: 14)
             VStack(alignment: .leading, spacing: 8) {
                 Text(purchase.product).font(.rgHeading(17)).foregroundStyle(RG.ink)
                 Text("\(purchase.store) · \(purchase.priceLabel)").font(.rgBody(14)).foregroundStyle(RG.textSecondary)
@@ -113,7 +113,7 @@ private struct CompactPurchaseRow: View {
     let purchase: Purchase
     var body: some View {
         HStack(spacing: 12) {
-            PlaceholderThumb(label: "IMG").frame(width: 38, height: 38)
+            StoreIcon(store: purchase.store, size: 38, cornerRadius: 11)
             VStack(alignment: .leading, spacing: 1) {
                 Text(purchase.product).font(.rgBody(15, weight: .medium)).foregroundStyle(RG.ink)
                 Text("\(purchase.store) · \(purchase.priceLabel)").font(.rgBody(13)).foregroundStyle(RG.textTertiary)
@@ -130,7 +130,7 @@ private struct RecentlyAddedRow: View {
     let purchase: Purchase
     var body: some View {
         HStack(spacing: 12) {
-            PlaceholderThumb(label: "IMG").frame(width: 38, height: 38)
+            StoreIcon(store: purchase.store, size: 38, cornerRadius: 11)
             VStack(alignment: .leading, spacing: 1) {
                 Text(purchase.product).font(.rgBody(15, weight: .medium)).foregroundStyle(RG.ink)
                 Text("Scanned just now").font(.rgBody(13)).foregroundStyle(RG.textTertiary)

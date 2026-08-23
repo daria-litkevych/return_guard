@@ -56,7 +56,7 @@ private struct WarrantyCard: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 14) {
             HStack(spacing: 13) {
-                PlaceholderThumb(label: "IMG").frame(width: 48, height: 48)
+                StoreIcon(store: purchase.store, size: 48, cornerRadius: 13)
                 VStack(alignment: .leading, spacing: 2) {
                     Text(purchase.product).font(.rgHeading(17)).foregroundStyle(RG.ink)
                     Text("\(purchase.store) · \(purchase.priceLabel)").font(.rgBody(13)).foregroundStyle(RG.textTertiary)

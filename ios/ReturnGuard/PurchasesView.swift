@@ -87,7 +87,7 @@ private struct PurchaseListRow: View {
     let purchase: Purchase
     var body: some View {
         HStack(spacing: 12) {
-            PlaceholderThumb(label: "IMG").frame(width: 42, height: 42)
+            StoreIcon(store: purchase.store, size: 42, cornerRadius: 12)
             VStack(alignment: .leading, spacing: 1) {
                 Text(purchase.product).font(.rgBody(15, weight: .medium)).foregroundStyle(RG.ink)
                 Text("\(purchase.store) · \(purchase.priceLabel)").font(.rgBody(13)).foregroundStyle(RG.textTertiary)

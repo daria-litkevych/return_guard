@@ -2,7 +2,8 @@
 
 A native SwiftUI app built from the ReturnGuard design: Home / Purchases /
 Warranties / Settings tabs, purchase detail, an add-purchase flow with real
-receipt scanning, and scheduled return-deadline reminders.
+receipt scanning, scheduled return-deadline reminders, and store logos next
+to each purchase.
 
 ## What's implemented
 
@@ -26,6 +27,22 @@ receipt scanning, and scheduled return-deadline reminders.
   deleted, all handled by the same sync path. The Settings toggle requests
   notification permission the first time it's turned on, and reverts
   itself with an alert if permission is denied.
+- **Store logos** — `StoreIcon` (`StoreIcon.swift`) shows the actual
+  retailer's icon next to each purchase in Home/Purchases/Warranties and
+  live in the add-purchase form as you type a recognized store name.
+  Logos are **live-fetched from Google's public favicon service**, never
+  bundled into the app — the standard lower-risk pattern for showing a
+  third party's mark (same as Mint/YNAB and most finance apps): it's for
+  merchant identification, not endorsement, and nothing gets redistributed
+  in the app binary the way a bundled logo asset would be. `StoreDirectory`
+  is a curated name→domain map (~25 common retailers); anything not in it
+  — or any fetch failure — falls back to a colored initial-letter
+  monogram, so the UI never shows a broken-image glyph. **Privacy note**:
+  this does mean the app calls out to Google with the store name to fetch
+  its icon, which is a small dent in the "no financial access, receipts
+  stay private" promise in Settings — worth knowing if that matters to you.
+  (Clearbit's `logo.clearbit.com`, the other well-known free logo option,
+  no longer resolves at all as of this writing — verified dead, not used.)
 - **Brand fonts** — Barlow and Barlow Condensed (OFL-licensed, from Google
   Fonts) are embedded and used throughout, replacing the earlier
   system-font stand-in.
@@ -44,27 +61,33 @@ receipt scanning, and scheduled return-deadline reminders.
 - No backend or cross-device sync — SwiftData is local to the device.
 - No batching of same-day reminders across multiple purchases (the
   design's "reminders for the same day are batched into one" — each
-  purchase schedules its own two notifications independently; if several
-  hit their 7-day or 1-day mark on the same date you'll get one
-  notification per purchase, not a merged one).
+  purchase schedules its own two notifications independently).
+- `StoreDirectory`'s domain map is a fixed list — an unmapped store (or
+  a typo) always gets the monogram, never a guessed domain (deliberate:
+  guessing could fetch and display a stranger's unrelated site icon).
 
 ## Verified
 
-This has been built and run for real — Xcode is fully installed here now
-(not just the Command Line Tools, which is what earlier notes in this
-history referred to). In the iOS Simulator (iPhone 17):
+Built and run for real in the iOS Simulator (iPhone 17) — full Xcode is
+installed, not just the Command Line Tools:
 
-- Clean build, no errors.
+- Clean build, no errors, across every feature above.
 - Home, purchase detail (mark-as-returned persists correctly), Purchases
-  search/filters, the Add Purchase sheet, and the manual-entry form all
-  behave as designed.
-- Fixed a real bug this way: sample data was seeding more than once across
-  relaunches (tripled purchases), traced to gating seeding on an in-memory
-  check instead of a persisted flag — see `AppModel.seedIfNeeded()`.
+  search/filters, Warranties, the Add Purchase sheet, and the
+  manual-entry form all behave as designed.
+- Store logos confirmed actually loading over the network for Amazon,
+  Zalando, IKEA, Uniqlo, Philips Hue, and Coolblue — real icons, not
+  placeholders. Quality varies by site (whatever favicon each one
+  actually has), which is an inherent limit of using a free favicon
+  service rather than curated brand assets.
+- Fixed a real bug this way: sample data was seeding more than once
+  across relaunches (tripled purchases), traced to gating seeding on an
+  in-memory check instead of a persisted flag — see
+  `AppModel.seedIfNeeded()`.
 
-**Not verifiable in Simulator** (no camera hardware, and this environment's
-simulator auto-resolves permission prompts without showing them
-interactively):
+**Not verifiable in Simulator** (no camera hardware, and this
+environment's simulator auto-resolves permission prompts without showing
+them interactively):
 - The actual VisionKit camera capture + Vision OCR pipeline — code review
   and cross-checking against Apple's documented API shapes is as far as
   this environment could verify.
@@ -90,15 +113,16 @@ Both are worth a real first-run check on your physical iPhone.
 6. The first "Scan receipt" tap prompts for camera permission
    (`NSCameraUsageDescription` is set in `Info.plist`). Turning on
    Notifications in Settings prompts for notification permission the same
-   way.
+   way. Store logos need network access — they'll silently fall back to
+   monograms if you're offline.
 
 A free-account build expires after 7 days — reopen Xcode and hit Run again
 to reinstall it.
 
 ## Notes / simplifications
 
-- Icons are SF Symbols rather than the hand-drawn icons in the original
-  mockups.
+- Icons elsewhere in the UI (nav bar, buttons) are SF Symbols rather than
+  the hand-drawn icons in the original mockups.
 - OCR field extraction is heuristic (largest currency-shaped number on
   the receipt = price, first date-like text = purchase date, first
   text-heavy line = store name) — good enough to save typing on a clean
