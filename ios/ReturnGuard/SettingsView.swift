@@ -2,8 +2,9 @@ import SwiftUI
 
 struct SettingsView: View {
     @EnvironmentObject var model: AppModel
-    @AppStorage("notificationsEnabled") private var notificationsOn = true
+    @AppStorage(NotificationManager.notificationsEnabledKey) private var notificationsOn = true
     @State private var showDeleteConfirm = false
+    @State private var showNotificationsDeniedAlert = false
 
     var body: some View {
         ScrollView {
@@ -32,6 +33,19 @@ struct SettingsView: View {
                         Text("Notifications").font(.rgBody(15)).foregroundStyle(RG.ink)
                         Spacer()
                         Toggle("", isOn: $notificationsOn).labelsHidden().tint(RG.accent)
+                            .onChange(of: notificationsOn) { _, isOn in
+                                Task {
+                                    if isOn {
+                                        let granted = await NotificationManager.requestAuthorization()
+                                        if !granted {
+                                            notificationsOn = false
+                                            showNotificationsDeniedAlert = true
+                                            return
+                                        }
+                                    }
+                                    NotificationManager.syncReminders(for: model.purchases)
+                                }
+                            }
                     }
                     .padding(12)
                     RowDivider().padding(.horizontal, 12)
@@ -99,6 +113,11 @@ struct SettingsView: View {
             Button("Cancel", role: .cancel) {}
         } message: {
             Text("This removes every tracked purchase and warranty. This can't be undone.")
+        }
+        .alert("Notifications are off", isPresented: $showNotificationsDeniedAlert) {
+            Button("OK", role: .cancel) {}
+        } message: {
+            Text("Turn on notifications for ReturnGuard in iOS Settings to get return reminders.")
         }
     }
 

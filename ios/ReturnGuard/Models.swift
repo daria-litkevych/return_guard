@@ -3,6 +3,10 @@ import SwiftData
 
 @Model
 final class Purchase {
+    /// Stable across the purchase's lifetime — used to key scheduled
+    /// notification identifiers (SwiftData's own persistentModelID isn't
+    /// guaranteed stable until first save).
+    var id: UUID = UUID()
     var product: String
     var store: String
     var price: Double

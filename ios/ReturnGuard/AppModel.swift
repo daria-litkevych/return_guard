@@ -27,8 +27,18 @@ final class AppModel: ObservableObject {
         self.purchases = purchases
     }
 
+    /// Gates on a persisted flag rather than `purchases.isEmpty` — RootView's
+    /// `onAppear` can fire more than once per install (e.g. across relaunches
+    /// during development), and the in-memory `purchases` array can still
+    /// read empty on a very first call if the `@Query` hasn't delivered its
+    /// initial fetch yet. Either gap would silently reseed the sample seven
+    /// on top of what's already there. A UserDefaults flag makes "seed
+    /// exactly once per install" true regardless of that timing.
+    private static let hasSeededKey = "hasSeededSampleData"
+
     func seedIfNeeded() {
-        guard let context = modelContext, purchases.isEmpty else { return }
+        guard let context = modelContext, !UserDefaults.standard.bool(forKey: Self.hasSeededKey) else { return }
+        UserDefaults.standard.set(true, forKey: Self.hasSeededKey)
         for purchase in Purchase.samples { context.insert(purchase) }
         try? context.save()
     }

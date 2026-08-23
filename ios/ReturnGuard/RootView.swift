@@ -65,9 +65,11 @@ struct RootView: View {
             model.modelContext = modelContext
             model.sync(purchases)
             model.seedIfNeeded()
+            NotificationManager.syncReminders(for: purchases)
         }
         .onChange(of: purchases) { _, newValue in
             model.sync(newValue)
+            NotificationManager.syncReminders(for: newValue)
         }
     }
 }
